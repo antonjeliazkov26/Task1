@@ -1,0 +1,34 @@
+public class Main {
+    public static void main(String[] args) {
+     
+        Book book1 = new Book("1984", "George Orwell", 328);
+        Book book2 = new Book("To Kill a Mockingbird", "Harper Lee", 281);
+
+
+        book1.displayDetails();
+        book2.displayDetails();
+    }
+}
+
+
+class Book {
+    String title;
+    String author;
+    int numberOfPages;
+
+
+    public Book(String Atitle, String Aauthor, int AnumberOfPages) {
+        this.title = Atitle;
+        this.author = Aauthor;
+        this.numberOfPages = AnumberOfPages;
+    }
+
+    public void displayDetails() {
+        System.out.println("Title: " + this.title);
+        System.out.println("Author: " + this.author);
+        System.out.println("Number of Pages: " + this.numberOfPages);
+        System.out.println();
+    }
+}
+
+
