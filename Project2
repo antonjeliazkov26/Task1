@@ -1,0 +1,76 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Main().createUI();
+            }
+        });
+    }
+
+    int generatedNumber = new Random().nextInt(100) + 1;
+
+    public void createUI() {
+        JFrame frame = new JFrame("Guessing Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new BorderLayout());
+
+        JLabel welcomeLabel = new JLabel("Welcome to the Guessing Game!", SwingConstants.CENTER);
+        JLabel instructionLabel = new JLabel("Guess a number between 1 and 100.", SwingConstants.CENTER);
+        JLabel feedbackLabel = new JLabel("Good luck!", SwingConstants.CENTER);
+        JTextField inputField = new JTextField(10);
+        JButton submitButton = new JButton("Submit");
+        JButton quitButton = new JButton("Quit");
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String userInput = inputField.getText();
+                try {
+                    int guessedNumber = Integer.parseInt(userInput);
+
+                    if (guessedNumber < generatedNumber) {
+                        feedbackLabel.setText("Too low! Try a bigger number.");
+                    } else if (guessedNumber > generatedNumber) {
+                        feedbackLabel.setText("Too high! Try a smaller number.");
+                    } else {
+                        feedbackLabel.setText("Congratulations! You guessed it!");
+                        inputField.setEnabled(false);
+                        submitButton.setEnabled(false);
+                    }
+                } catch (NumberFormatException ex) {
+                    feedbackLabel.setText("Invalid input! Please enter a number.");
+                }
+            }
+        });
+
+
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new FlowLayout());
+        inputPanel.add(inputField);
+        inputPanel.add(submitButton);
+        inputPanel.add(quitButton);
+        inputPanel.add(feedbackLabel);
+
+        frame.add(welcomeLabel, BorderLayout.NORTH);
+        frame.add(instructionLabel, BorderLayout.CENTER);
+        frame.add(feedbackLabel, BorderLayout.NORTH);
+        frame.add(inputPanel, BorderLayout.PAGE_END);
+
+        frame.setVisible(true);
+    }
+}
