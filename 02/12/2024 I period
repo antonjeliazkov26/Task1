@@ -1,0 +1,145 @@
+public class RPG {
+
+    public static void main(String[] args) {
+        // Create instances of characters
+        Wizard wizard = new Wizard("Merlin", 100, 10, 5);
+        Warrior warrior = new Warrior("Ragnar", 100, 7, 10);
+        Archer archer = new Archer("Ivan", 80, 15, 6);
+
+        // Task 5: Create an object/instance of your new character's class.
+        System.out.println(wizard.getName() + "'s health: " + wizard.getHealth());
+        System.out.println(warrior.getName() + "'s health: " + warrior.getHealth());
+        System.out.println(archer.getName() + "'s health: " + archer.getHealth());
+
+        System.out.println("Game is starting...");
+        warrior.attack(wizard);
+        System.out.println(warrior.getName() + " attacks " + wizard.getName() + ". Health updated: " + wizard.getHealth());
+
+        // Task 6: Make the wizard attack the new character.
+        wizard.attack(archer);
+        System.out.println(wizard.getName() + " attacks " + archer.getName() + ". Health updated: " + archer.getHealth());
+
+        // Task 7: Display the new stats
+        System.out.println("\nUpdated Stats:");
+        System.out.println(wizard.getName() + "'s health: " + wizard.getHealth());
+        System.out.println(warrior.getName() + "'s health: " + warrior.getHealth());
+        System.out.println(archer.getName() + "'s health: " + archer.getHealth());
+
+        // CHALLENGE: All characters attack each other
+        archer.attack(warrior);
+        System.out.println(archer.getName() + " attacks " + warrior.getName() + ". Health updated: " + warrior.getHealth());
+
+        warrior.attack(archer);
+        System.out.println(warrior.getName() + " attacks " + archer.getName() + ". Health updated: " + archer.getHealth());
+    }
+}
+
+class Wizard {
+    private String name;
+    private int health;
+    private int darkMagic;
+    private int wizardArmor;
+
+    public Wizard(String name, int health, int darkMagic, int wizardArmor) {
+        this.name = name;
+        this.health = health;
+        this.darkMagic = darkMagic;
+        this.wizardArmor = wizardArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getDarkMagic() {
+        return darkMagic;
+    }
+
+    public void attack(Archer target) {
+        target.takeDamage(darkMagic - target.getArcherArmor());
+    }
+
+    public void takeDamage(int damage) {
+        health = Math.max(health - damage, 0); // Health cannot go below 0
+    }
+}
+
+class Warrior {
+    private String name;
+    private int health;
+    private int sword;
+    private int metalArmor;
+
+    public Warrior(String name, int health, int sword, int metalArmor) {
+        this.name = name;
+        this.health = health;
+        this.sword = sword;
+        this.metalArmor = metalArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getSword() {
+        return sword;
+    }
+
+    public int getMetalArmor() {
+        return metalArmor;
+    }
+
+    public void attack(Wizard target) {
+        target.takeDamage(sword - target.wizardArmor);
+    }
+
+    public void takeDamage(int damage) {
+        health = Math.max(health - damage, 0); // Health cannot go below 0
+    }
+}
+
+class Archer {
+    private String name;
+    private int health;
+    private int arrow;
+    private int archerArmor;
+
+    public Archer(String name, int health, int arrow, int archerArmor) {
+        this.name = name;
+        this.health = health;
+        this.arrow = arrow;
+        this.archerArmor = archerArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getArrow() {
+        return arrow;
+    }
+
+    public int getArcherArmor() {
+        return archerArmor;
+    }
+
+    public void attack(Warrior target) {
+        target.takeDamage(arrow - target.getMetalArmor());
+    }
+
+    public void takeDamage(int damage) {
+        health = Math.max(health - damage, 0); // Health cannot go below 0
+    }
+}
