@@ -1,0 +1,150 @@
+public class Main {
+    public static void main(String[] args) {
+        Animals lion = new Animals("Lion");
+        Habitat savannah = new Habitat("Savannah");
+
+        Animals elephant = new Animals("Elephant");
+        Habitat jungle = new Habitat("Jungle");
+
+        Animals eagle = new Animals("Eagle");
+        Habitat tundra = new Habitat("Tundra");
+
+        Animals polarBear = new Animals("Polar Bear");
+        Habitat arctic = new Habitat("Arctic");
+
+        Zoo zoo1 = new Zoo();
+        zoo1.addAnimal1(lion);
+        zoo1.addAnimal2(elephant);
+        zoo1.addAnimal3(eagle);
+        zoo1.addAnimal4(polarBear);
+
+        lion.setHabitat(savannah);
+        elephant.setHabitat(jungle);
+        eagle.setHabitat(tundra);
+        polarBear.setHabitat(arctic);
+
+        Staff zookeeper = new Staff("John", "Zookeeper");
+        Staff veterinarian = new Staff("Max", "Veterinarian");
+        Staff coordinator = new Staff("Alexander", "Coordinator");
+
+        zookeeper.assignStaff(savannah);
+        veterinarian.assignStaff(jungle);
+        coordinator.assignStaff(arctic);
+
+        System.out.println(zoo1.getAnimal1().getAnimal() + " lives in the " + zoo1.getAnimal1().getHabitat().getHabitatName());
+        System.out.println(zoo1.getAnimal2().getAnimal() + " lives in the " + zoo1.getAnimal2().getHabitat().getHabitatName());
+        System.out.println(zoo1.getAnimal3().getAnimal() + " lives in the " + zoo1.getAnimal3().getHabitat().getHabitatName());
+        System.out.println(zoo1.getAnimal4().getAnimal() + " lives in the " + zoo1.getAnimal4().getHabitat().getHabitatName());
+
+        System.out.println(zookeeper.getName() + " is a " + zookeeper.getRole() + " assigned to " + zookeeper.getAssignedHabitat().getHabitatName());
+        System.out.println(veterinarian.getName() + " is a " + veterinarian.getRole() + " assigned to " + veterinarian.getAssignedHabitat().getHabitatName());
+        System.out.println(coordinator.getName() + " is a " + coordinator.getRole() + " assigned to " + coordinator.getAssignedHabitat().getHabitatName());
+    }
+}
+
+class Animals {
+    private String animal;
+    private Habitat habitat;
+
+    public Animals(String animal) {
+        this.animal = animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setHabitat(Habitat habitat) {
+        this.habitat = habitat;
+    }
+
+    public Habitat getHabitat() {
+        return habitat;
+    }
+}
+
+class Habitat {
+    private String habitatName;
+
+    public Habitat(String habitatName) {
+        this.habitatName = habitatName;
+    }
+
+    public String getHabitatName() {
+        return habitatName;
+    }
+
+    public void setHabitatName(String habitatName) {
+        this.habitatName = habitatName;
+    }
+}
+
+class Zoo {
+    private Animals a1;
+    private Animals a2;
+    private Animals a3;
+    private Animals a4;
+
+    public Animals getAnimal1() {
+        return a1;
+    }
+
+    public Animals getAnimal2() {
+        return a2;
+    }
+
+    public Animals getAnimal3() {
+        return a3;
+    }
+
+    public Animals getAnimal4() {
+        return a4;
+    }
+
+    public void addAnimal1(Animals animal) {
+        a1 = animal;
+    }
+
+    public void addAnimal2(Animals animal) {
+        a2 = animal;
+    }
+
+    public void addAnimal3(Animals animal) {
+        a3 = animal;
+    }
+
+    public void addAnimal4(Animals animal) {
+        a4 = animal;
+    }
+}
+
+class Staff {
+    private String name;
+    private String role;
+    private Habitat assignedHabitat;
+
+    public Staff(String name, String role) {
+        this.name = name;
+        this.role = role;
+    }
+
+    public void assignStaff(Habitat habitat) {
+        this.assignedHabitat = habitat;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public Habitat getAssignedHabitat() {
+        return assignedHabitat;
+    }
+}
